@@ -26,21 +26,24 @@ button2 = InlineKeyboardButton(text= 'Формулы расчета', callback_d
 kb_calories.add(button, button2)
 
 kb_buy = InlineKeyboardMarkup()
-button6 = InlineKeyboardButton(text= 'Logitech G102', callback_data = 'mouse')
-button7 = InlineKeyboardButton(text= 'Logitech G304', callback_data= 'mouse2')
-button8 = InlineKeyboardButton(text= 'Logitech G PRO', callback_data= 'mouse3')
-kb_buy.add(button6, button7, button8)
+button6 = InlineKeyboardButton(text='Logitech G102', callback_data = 'mouse')
+button7 = InlineKeyboardButton(text='Logitech G304', callback_data= 'mouse2')
+button8 = InlineKeyboardButton(text='Logitech G PRO', callback_data= 'mouse3')
+button9 = InlineKeyboardButton(text='ARDOR GAMING Fury', callback_data= 'mouse4')
+kb_buy.add(button6, button7, button8, button9)
 
 
 @dp.message_handler(text= 'Купить')
 async def buy(message):
     with open('files/1.webp', 'rb') as img:
-        await message.answer_photo(img,  'Название: Logitech G102 | Описание: описание | Цена: 10.000', reply_markup=start_kb)
+        await message.answer_photo(img,  'Название: Logitech G102 | Описание: описание 1 | Цена: 10.000', reply_markup=start_kb)
     with open('files/2.webp', 'rb') as img2:
-        await message.answer_photo(img2, 'Название: Logitech G304 | Описание: описание | Цена: 15.000', reply_markup=start_kb)
+        await message.answer_photo(img2, 'Название: Logitech G304 | Описание: описание 2 | Цена: 15.000', reply_markup=start_kb)
     with open('files/3.webp', 'rb') as img3:
-        await message.answer_photo(img3, 'Название: Logitech G PRO | Описание: описание | Цена: 20.000', reply_markup=start_kb)
-    await message.answer('Выерите продукт для покупки:', reply_markup= kb_buy)
+        await message.answer_photo(img3, 'Название: Logitech G PRO | Описание: описание 3 | Цена: 20.000', reply_markup=start_kb)
+    with open('files/4.webp', 'rb') as img4:
+        await message.answer_photo(img4, 'Название: ARDOR GAMING Fury | Описание: описание 4 | Цена: 25.000', reply_markup=start_kb)
+    await message.answer('Выерите продукт для покупки:', reply_markup=kb_buy)
 
 @dp.callback_query_handler(text = ['mouse'])
 async def buy_mouse(call):
@@ -100,6 +103,10 @@ async def send_calories(message, state):
 
     await message.answer(f'Ваша норма калорий: {colories:.0f}, ккал в день')
     await state.finish()
+
+@dp.message_handler()
+async def message(message):
+    await message.answer('Введите команду /start, чтобы начать общение.')
 
 
 
